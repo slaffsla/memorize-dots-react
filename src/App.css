@@ -1,3 +1,7 @@
+*{
+  margin: 0px;
+}
+
 #root {
   margin: 0;
   text-align: center;
@@ -6,10 +10,23 @@
 
 }
 
+.top-section {
+  display: grid;
+  background-color: rgb(39, 39, 44);
+  
+}
+
+.buttons {
+  display: flex;
+  margin: auto;
+  margin-bottom: 11px;
+  margin-top: 5px;
+}
+
 .App {
   max-width: 1400px;
   height: 100vh;
-  background-color: #1f2021aa;
+  background-color: rgba(28, 30, 31, 0.667);
   color: antiquewhite;
 }
 
@@ -23,36 +40,38 @@
 
 #thingy:hover {
   filter: brightness(0.8);
-  filter: invert(75%);
   color: rgb(192, 224, 244);
   filter: drop-shadow(0 0 .4em #565ddeaa);
 
 }
 
-.button, h1 {
-  z-index: 30;
+.button {
+  z-index: 1;
 }
 
 #h1, #h2, #h3 {
-  z-index: 30;
+  z-index: 4      ;
+  margin-bottom: 5px;
+  margin-top:  5px;
 }
 
-.button, #thingy{
+.button, #thingy {
+  width: 100px;
   cursor:pointer;
   user-select:none;
   text-align: center;
   text-decoration: none;
   transition-duration: 0.4s;
-  -webkit-transition-duration: 0.4s; /* Safari */
+  -webkit-transition-duration: 0.4s;
 }
 
 .button:hover, #thingy:hover {
-  transition-duration: 0.1s;
+  transition-duration: 0.2s;
   background-color: #3A3A3A;
 }
 
-.button:after {
-  content: "";
+/* .thingy:after {
+  background-color: red;
   display: block;
   position: absolute;
   border-radius: 4em;
@@ -63,9 +82,9 @@
   opacity: 0;
   transition: all 0.5s;
   box-shadow: 0 0 10px 40px white;
-}
+} */
 
-.button:active:after {
+/* .button:active:after {
   box-shadow: 0 0 0 0 white;
   position: absolute;
   border-radius: 4em;
@@ -73,11 +92,11 @@
   top:0;
   opacity: 1;
   transition: 0s;
-}
+} */
 
-.button:active {
-  top: 1px;
-}
+/* .button:active {
+  top: 10px;
+} */
 
 h1 {
   font-size: calc(1.5em + 3vw);
