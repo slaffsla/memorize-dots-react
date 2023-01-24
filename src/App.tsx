@@ -26,28 +26,12 @@ function App() {
 
   const popThingy = () => {
     // if (count<=1) return
-    const lastThingie = stuff[stuff.length-1]
-    console.log("lastThingie: ",lastThingie)
+    const tempStuff = [...stuff]
+    const lastThingie = tempStuff.pop()
+    if(!lastThingie) return
     setPopped([...popped, lastThingie])
-    let stuffArray = stuff
-    stuffArray.pop()
-    setStuff(stuffArray)
-    setCount(count-1)
-  }
-
-  const redoThingy = () => {
-    const poppedThingie = popped[popped.length-1]
-    setStuff([...stuff, poppedThingie])
-    let poppedArray = popped
-    poppedArray.pop()
-    setPopped(poppedArray)
-    //setStuff([...stuff, lastItem])
-    setCount(count+1)
-  }
-  const clearAll = () => {
-  setStuff([])
-  setPopped([])
-  setCount(1)
+    setStuff(tempStuff)
+    setCount(() => (count-1) )
   }
 
   const placeThingy = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -57,12 +41,30 @@ function App() {
     do {
       randomColor = fetchColor()
       console.log("colors:", randomColor, randomColor2)
-      console.log(lastColor==randomColor)
-    }
-    while (lastColor==randomColor);
+      lastColor==randomColor && console.log(lastColor==randomColor)
+    } while (lastColor==randomColor);
     lastColor = randomColor
+    const tempPopped = [...popped]
+    tempPopped.pop()
+    setPopped(tempPopped)
     setStuff([...stuff, {x: clientX, y: clientY, itemNr: count, size: count, color: randomColor, textColor: randomColor2}])
   }  
+
+  const redoThingy = () => {
+    if (!popped[0]) return
+    const poppedThingie = popped[popped.length-1]
+    setStuff([...stuff, poppedThingie])
+    let poppedArray = [...popped]
+    poppedArray.pop()
+    setPopped(poppedArray)
+    setCount(() => (count+1) )
+  }
+
+  const clearAll = () => {
+  setStuff([])
+  setPopped([])
+  setCount(1)
+  }
 
   return (
     <>
@@ -70,7 +72,7 @@ function App() {
         <div className='buttons'>
           <button className='button' onClick={clearAll}>Clear</button>
           <button className='button' onClick={popThingy} disabled = {count <=1}>Undo</button>
-          <button className='button' onClick={redoThingy} disabled = {popped.length==0}>Redo</button>
+          <button className='button' onClick={redoThingy} disabled = {popped.length===0}>Redo</button>
         </div>
         <h3>Click anywhere</h3>
         <h5>Then you can undo the mess</h5>
@@ -78,11 +80,8 @@ function App() {
     
       <div className="App" onClick={placeThingy}>
         <div className="card">
-          <div className ="stuff" onClick={placeThingy} style = {{zIndex:"100"}}>
-            {stuff.map((thingy) => <div key= {thingy.itemNr} onClick={e => {
-              if (e.detail === 1) {popThingy}
-              if (e.detail === 2) {popThingy}
-            }} id = "thingy" style = {{ backgroundColor: thingy.color,
+          <div className ="stuff" onClick={placeThingy} style = {{zIndex:"10"}}>
+            {stuff.map((thingy) => <div key= {thingy.itemNr}  id = "thingy" style = {{ backgroundColor: thingy.color,
             color: randomColor2,  borderRadius: 5+count*2,
             width: 10+thingy.size*4, height: 10+thingy.size*4, left: thingy.x-thingy.size*2,
             top: thingy.y-thingy.size*2, }}>{thingy.itemNr}</div>)}

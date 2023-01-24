@@ -4,7 +4,7 @@
 
 .top-section {
   --s: 14px;
-  --c1: #1e1b22;
+  --c1: #27232c;
   --c2: #060405;
   
   --_s: calc(2*var(--s)) calc(2*var(--s));
@@ -17,7 +17,7 @@
     calc(-.3*var(--s)) calc(-.3*var(--s))/var(--_g),
     conic-gradient(from 90deg at 20% 20%,var(--c2) 25%,var(--c1) 0) 
      0 0/var(--s) var(--s);
-  animation: m  10s alternate-reverse;
+  animation: m  9s alternate-reverse;
 }
 @keyframes m {
   0% {
@@ -105,7 +105,7 @@
 
 #h1, #h2, #h3 {
   z-index: 2      ;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   margin-top:  5px;
 }
 
